@@ -24,7 +24,7 @@ public:
 	
 	
     nBlock_Eeprom(PinName MOSI,PinName MISO, PinName SCLK,PinName CS,uint16_t address);
-    void triggerInput(uint32_t inputNumber, uint32_t value);
+    void triggerInput(nBlocks_Message message);
 	void endFrame();
 	
    

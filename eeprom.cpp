@@ -32,21 +32,21 @@ nBlock_Eeprom :: nBlock_Eeprom(PinName MOSI,PinName MISO, PinName SCLK, PinName 
 * 
 */
 
-void nBlock_Eeprom:: triggerInput(uint32_t inputNumber, uint32_t value){
+void nBlock_Eeprom:: triggerInput(nBlocks_Message message){
 	
 	//char test_value = 33;// purely for debugging, test value to write to memory, in future will use function parameter "value"
 	
 	
-	if(inputNumber == WRITE){
+	if(message.inputNumber == WRITE){
 		
 		
 		_eeprom.write_enable();
-		_eeprom.write_byte(_address,(char)value);
+		_eeprom.write_byte(_address,(char)message.intValue);
 	
 	
 	}
 	
-	else if(inputNumber == READ){
+	else if(message.inputNumber == READ){
 		
 		output[0] = _eeprom.read_byte(_address);
 		
@@ -55,7 +55,7 @@ void nBlock_Eeprom:: triggerInput(uint32_t inputNumber, uint32_t value){
 		
 	}
 	
-	else if(inputNumber == ERASE){
+	else if(message.inputNumber == ERASE){
 		
 		_eeprom.write_enable();
 		_eeprom.page_erase(_address);
